@@ -1,32 +1,32 @@
-# Compilação e execução do código fonte:
+# Compilation and execution of the source code:
 
-Compilação de MySharingServer.java: 
+Compilation of MySharingServer.java: 
 - `cd codigo_fonte/`
 - `javac MySharingServer.java`
 
-Execução de MySharingServer: `java MySharingServer <port>`
-Nota: `<port>` é um argumento opcional. Se não for passado um `<port>`, 12345 será a escolha padrão.
-      `<port>` tem que estar entre ]1024,49151[
+Execution of MySharingServer: `java MySharingServer <port>`
+Note: `<port>` is an optional argument. In case no `<port>` is provided, 12345 will be the default choice.
+      `<port>` must be between ]1024,49151[
 
-Compilação de MySharingClient.java: 
+Compilation of MySharingClient.java: 
 - `cd codigo_fonte/`
 - `javac MySharingClient.java`
 
-Execução de MySharingClient: `java MySharingClient <server-address>:<port> <username> <password>`
-Nota: `<port>` é opcional aqui também, o cliente corre apenas com o endereço IP.
+Execution of MySharingClient: `java MySharingClient <server-address>:<port> <username> <password>`
+Note: `<port>` is optional, the client runs with just the IP address.
 
 
-# Execução dos ficheiros.jar:
+# Execution of the .jar files:
 
 MySharingServer: `java -jar MySharingServer.jar <port>`
-Nota: `<port>` é um argumento opcional. Se não for passado um `<port>`, 12345 será a escolha padrão.
-      `<port>` tem que estar entre ]1024,49151[
+Note: `<port>` is an optional argument. In case no `<port>` is provided, 12345 will be the default choice.
+      `<port>` must be between ]1024,49151[
 
 MySharingClient: `java -jar MySharingClient.jar <server-address>:<port> <username> <password>`
-Nota: `<port>` é opcional aqui também, o cliente corre apenas com o endereço IP.
+Note: `<port>` is optional, the client runs with just the IP address.
 
-# Utilizadores e passwords a serem usadas pelas keystores já criadas
-O projeto não suporta uma criação dinâmica de keystores para cada novo utilizador. Sendo assim, para executar o projeto, devem-se usar os seguintes utilizadores já criados:
+# Usernames and passwords to be used by the existing keystores
+The project doesn't support a dynamic creation of keystores for each new user. As such, in order to run the project, the already existing users must be used:
 
 <table>
   <thead>
@@ -43,19 +43,13 @@ O projeto não suporta uma criação dinâmica de keystores para cada novo utili
 </table>
 
 
-# Limitações do trabalho:
-Ao terminar o cliente com "CTRL + C" é lançada uma exceção "NoSuchElementException: no line found".
-Esta exceção é lançada porque o "Scanner" da linha de comandos procura sempre a próxima linha a ser inserida
-pelo utilizador.
-Os utilizadores não podem criar workspaces cujo nome contenha "workspace" para evitar problemas com nomes 
-dos workspaces padrão criados no registo de um novo utilizador (decisão do grupo).
-As passwords das keystores são iguais às que os utilizadores usam para se autenticar, logo se o utilizador inserir
-uma password errada é lançada uma exceção.
+# Limitations of the project:
+When terminating the client with "CTRL + C" an exception of type "NoSuchElementException: no line found" is thrown, even though "CTRL + C" worked as intended. This happens due to the fact that the command line Scanner is always looking for the next input of the user. 
+The users cannot create workspaces whose name contains the string "workspace". Whenever a new user is registered, a default workspace with name "workspace" + user is created. In order to avoid conflicts with the naming of workspaces, this decision was made.
+The passwords of the keystores are the same as those used by each user to authenticate. As such, if a user decides to insert a different password, an exception is thrown. 
 
-# Nota
-Os diretórios sec_addons e client_tools contêm as keystores necessárias para executar os ficheiros .jar.
-O código fonte tem que ser compilado no formato apresentado no ficheiro .zip devido às suas dependências.
-Irá ser criado um diretório "server_files" após a primeira execução de tanto MySharingServer.jar e de MySharingServer.
-O grupo decidiu colocar algumas imagens para efeitos de teste do funcionamento do projeto.
-Ao executar o servidor, este apresenta uma escolha de geração de ficheiros de MAC. Se o administrador decidir não gerar
-estes ficheiros, a execução do servidor corre normalmente, mas sem verificações de integridade.
+# Note
+The directories `sec_addons` and `client_tools` contain the keystores used by the .jar executables.
+After the first execution of MySharingServer.jar or MySharingServer.class, a new directory `server_files` will be created. It stores a file with a catalog of each username to its password, a catalog of each workspace, etc.
+Some .jpg files were provided with the intent of testing the project, and showing that these files are encrypted when transfered to the MySharingServer.
+When executing the server for the first time, a choide appears, of wether to generate a MAC or not. In case the server administrator decides not to, the server will still run normally, although without verifying the integrity of its files.
